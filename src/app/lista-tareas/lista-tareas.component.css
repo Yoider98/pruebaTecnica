@@ -1,0 +1,94 @@
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+
+th {
+  background-color: #93beed;
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  text-align: center;
+}
+
+
+td {
+  padding: 10px;
+  border: 1px solid #bebaba;
+}
+
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e1e1e1;
+}
+
+
+button {
+  background-color: #64affe;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+
+button:hover {
+  background-color: #0a7af3;
+}
+
+
+h4 {
+  margin: 10px 0;
+  font-weight: normal;
+}
+
+
+h4 span {
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+
+h4 span:hover {
+  background-color: #e1e1e1;
+}
+.filter {
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.filter:hover {
+  background-color: #e1e1e1;
+}
+
+.selected {
+  background-color: #64affe;
+  color: white;
+}
+.filters{
+  margin-left: 60px;
+}
+.pagination-controls {
+  display: flex;
+  justify-content: center; /* Centra los botones horizontalmente */
+  margin-top: 20px; /* Espaciado superior opcional */
+}
+
+.pagination-controls button {
+  margin: 0 10px; /* Espaciado horizontal entre los botones */
+}

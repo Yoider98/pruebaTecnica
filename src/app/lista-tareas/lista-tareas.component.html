@@ -1,0 +1,40 @@
+<h1>Lista de tareas</h1>
+<h4>Filtros:
+    <span class="filter" (click)="setFilter('todas')" [class.selected]="filter === 'todas'">Todas</span>
+    <span class="filter" (click)="setFilter('completadas')" [class.selected]="filter === 'completadas'">Completadas</span>
+    <span class="filter" (click)="setFilter('pendientes')" [class.selected]="filter === 'pendientes'">Pendientes</span>
+</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarea of paginatedItems, let i= index">
+          <th>{{ i+1 }}</th>
+          <td>{{ tarea.nombre }}</td>
+          <td> {{ tarea.completed ? 'Completada' : 'Pendiente' }}</td>
+          <td>
+              <button (click)="editarTarea(tarea.id)">Editar</button>
+              <button (click)="actualizarTarea(tarea.id)" *ngIf="!tarea.completed">Marcar como Completada</button>
+              <app-modal-crear-editar
+  [tareaSeleccionada]="tareaSeleccionada"
+  (tareaGuardada)="cargarTareas()">
+</app-modal-crear-editar>
+
+          </td>
+      </tr>
+  </tbody>
+</table>
+<div *ngIf="tareas.length >= 10" class="pagination-controls">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+  <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= tareas.length">Siguiente</button>
+</div>
+
+
+
