@@ -6,31 +6,43 @@
 </h4>
 
 <table>
-    <thead>
-        <tr>
-            <th></th>
-            <th>Nombre</th>
-            <th>Estado</th>
-            <th>Acción</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let tarea of paginatedItems, let i= index">
-          <th>{{ i+1 }}</th>
-          <td>{{ tarea.nombre }}</td>
-          <td> {{ tarea.completed ? 'Completada' : 'Pendiente' }}</td>
-          <td>
-              <button (click)="editarTarea(tarea.id)">Editar</button>
-              <button (click)="actualizarTarea(tarea.id)" *ngIf="!tarea.completed">Marcar como Completada</button>
-              <app-modal-crear-editar
-  [tareaSeleccionada]="tareaSeleccionada"
-  (tareaGuardada)="cargarTareas()">
-</app-modal-crear-editar>
-
-          </td>
+  <thead>
+      <tr>
+          <th></th>
+          <th>Nombre de la tarea</th>
+          <th>Personas Asociadas</th>
+          <th>Estado</th>
+          <th>Acción</th>
       </tr>
-  </tbody>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tarea of paginatedItems; let i = index">
+        <th>{{ i + 1 }}</th>
+        <td>{{ tarea.nombre }}</td>
+        <td>
+            <div *ngFor="let persona of tarea.personas">
+                <strong>{{ persona.name }} ({{ persona.edad }})</strong>
+                <div>
+                    Habilidades:
+                    <span *ngFor="let habilidad of persona.habilidades; let j = index">
+                        {{ habilidad.habilidadNombre }}<span *ngIf="j < persona.habilidades.length - 1">, </span>
+                    </span>
+                </div>
+            </div>
+        </td>
+        <td>{{ tarea.completed ? 'Completada' : 'Pendiente' }}</td>
+        <td>
+            <button (click)="editarTarea(tarea.id)">Editar</button>
+            <button (click)="actualizarTarea(tarea.id)" *ngIf="!tarea.completed">Marcar como Completada</button>
+            <app-modal-crear-editar
+                [tareaSeleccionada]="tareaSeleccionada"
+                (tareaGuardada)="cargarTareas()">
+            </app-modal-crear-editar>
+        </td>
+    </tr>
+</tbody>
 </table>
+
 <div *ngIf="tareas.length >= 10" class="pagination-controls">
   <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
   <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= tareas.length">Siguiente</button>
